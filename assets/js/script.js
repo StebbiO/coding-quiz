@@ -44,6 +44,26 @@ var questions = [
             "answer 4"    
         ],
         correct: "answer 2"
+    },
+    {
+        question: "Sample question #3",
+        options: [
+            "answer 1",
+            "answer 2",
+            "answer 3",
+            "answer 4"    
+        ],
+        correct: "answer 3"
+    },
+    {
+        question: "Sample question #4",
+        options: [
+            "answer 1",
+            "answer 2",
+            "answer 3",
+            "answer 4"    
+        ],
+        correct: "answer 4"
     }
 ]
 
@@ -108,7 +128,8 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
     }
     i++;
     setTimeout(resetColors, 500);
-    showQuestions();
+    //showQuestions();
+    endGame();
 })
 
 function resetColors() {
@@ -129,6 +150,14 @@ function saveScore() {
 
     highScores = JSON.stringify(highScores);
     localStorage.setItem("highScores", highScores);
+}
+
+function endGame() {
+    if(i < questions.length && timeLeft != 0) {
+        showQuestions();
+    } else {
+        saveScore();
+    }
 }
 
 // function getResult() {
