@@ -107,11 +107,29 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
         console.log("false");
     }
     i++;
+    setTimeout(resetColors, 500);
     showQuestions();
 })
 
+function resetColors() {
+    document.querySelector(".btn-primary").classList.remove("correct");
+    document.querySelector(".btn-primary").classList.remove("incorrect");
+}
 
+function saveScore() {
+    var player = [];
+    var name = prompt("Please enter your name to save your score.");
+    player.push(name, score);
 
+    var highScores = JSON.parse(localStorage.getItem("highScores"));
+    if (!highScores) {
+        highScores = [];
+    }
+    highScores.push(player);
+
+    highScores = JSON.stringify(highScores);
+    localStorage.setItem("highScores", highScores);
+}
 
 // function getResult() {
 //     var answerChoices = document.getElementById("answer-choices");
