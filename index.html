@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Coding Quiz!</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <p>View High Scores</p>
+        </div>
+        <div id="counter"></div>
+    </header>
+
+    <!-- Opening Text -->
+    <section class="card d-flex align-items-center text-center" id="intro">
+        <h2>Coding Quiz Challenge</h2>
+        <p class="w-50">Test your coding knowledge with this short, timed quiz that will ask you questions regarding HTML, CSS, and JavaScript. Can you beat the clock and get the high score? Click the button below to start the quiz!</p>
+    </section>
+
+    <!-- Start button -->
+    <div class="d-flex justify-content-center px-10 mx-5">
+        <button id="start">
+            Start Quiz
+        </button>
+    </div>
+
+    <section class="d-flex justify-content-center" id="quiz">
+        <!-- Question container -->
+        <div id="question">
+            Insert Question
+        </div>
+        <div id="answer-choices">
+            <button id="choice1">Choice 1</button>
+            <button id="choice2">Choice 2</button>
+            <button id="choice3">Choice 3</button>
+            <button id="choice4">Choice 4</button>
+        </div>
+
+        <div class="result">
+
+        </div>
+    </section>
+    <script src="./assets/js/script.js"></script>
+</body>
