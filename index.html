@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style/style.css" />
     <title>Coding Quiz!</title>
 </head>
 
@@ -17,7 +18,7 @@
     </header>
 
     <!-- Opening Text -->
-    <section class="card d-flex align-items-center text-center" id="intro">
+    <section class="card d-flex align-items-center text-center bg-primary text-white" id="intro">
         <h2>Coding Quiz Challenge</h2>
         <p class="w-50">Test your coding knowledge with this short, timed quiz that will ask you questions regarding HTML, CSS, and JavaScript. Can you beat the clock and get the high score? Click the button below to start the quiz!</p>
     </section>
@@ -34,11 +35,11 @@
         <div id="question">
             Insert Question
         </div>
-        <div id="answer-choices">
-            <button id="choice1">Choice 1</button>
-            <button id="choice2">Choice 2</button>
-            <button id="choice3">Choice 3</button>
-            <button id="choice4">Choice 4</button>
+        <div class ="d-flex flex-column" id="answer-choices">
+            <button class="btn btn-primary" id="choice1">Choice 1</button>
+            <button class="btn btn-primary" id="choice2">Choice 2</button>
+            <button class="btn btn-primary" id="choice3">Choice 3</button>
+            <button class="btn btn-primary" id="choice4">Choice 4</button>
         </div>
 
         <div class="result">

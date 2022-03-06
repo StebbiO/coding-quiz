@@ -33,7 +33,7 @@ var questions = [
             "answer 3",
             "answer 4" 
         ],
-        answer: "answer 1"
+        correct: "answer 1"
     },
     {
         question: "Sample question #2",
@@ -43,7 +43,7 @@ var questions = [
             "answer 3",
             "answer 4"    
         ],
-        answer: "answer 2"
+        correct: "answer 2"
     }
 ]
 
@@ -61,28 +61,28 @@ function showQuestions() {
     document.querySelector("#choice4").innerHTML = questions[i].options[3];
 
     // each answer can be true or false, setting attributes
-    if(questions[i].options[0] === questions[i].answer) {
-        choice1.setAttribute("t-value", "true");
+    if(questions[i].options[0] === questions[i].correct) {
+        choice1.setAttribute("data-correct", "true");
     } else {
-        choice1.setAttribute("t-value", "false");
+        choice1.setAttribute("data-correct", "false");
     }
     
-    if(questions[i].options[1] === questions[i].answer) {
-        choice2.setAttribute("t-value", "true");
+    if(questions[i].options[1] === questions[i].correct) {
+        choice2.setAttribute("data-correct", "true");
     } else {
-        choice2.setAttribute("t-value", "false");
+        choice2.setAttribute("data-correct", "false");
     }
     
-    if(questions[i].options[2] === questions[i].answer) {
-        choice3.setAttribute("t-value", "true");
+    if(questions[i].options[2] === questions[i].correct) {
+        choice3.setAttribute("data-correct", "true");
     } else {
-        choice3.setAttribute("t-value", "false");
+        choice3.setAttribute("data-correct", "false");
     }
 
-    if(questions[i].options[3] === questions[i].answer) {
-        choice4.setAttribute("t-value", "true");
+    if(questions[i].options[3] === questions[i].correct) {
+        choice4.setAttribute("data-correct", "true");
     } else {
-        choice4.setAttribute("t-value", "false");
+        choice4.setAttribute("data-correct", "false");
     }
 }
 
@@ -90,12 +90,27 @@ showQuestions();
 
 // verify answers are correct and change score
 document.querySelector("#answer-choices").addEventListener("click", function(event) {
-    if(event.target.dataset.answer === "true") {
+    if(event.target.dataset["correct"] === "true") {
+        event.target.classList.add("correct");
+        score = score + 10;
+        console.log(score);
+        // event.target.innerText("You got it!");
         console.log("true");
-    } else if(event.target.dataset.answer === "false") {
+    } else if(event.target.dataset["correct"] === "false") {
+        event.target.classList.add("incorrect");
+        if(timeLeft > 5) {
+            timeLeft = timeLeft - 5;
+        } else if(timeLeft < 5) {
+            timeLeft = 0;
+        }
+        // event.target.innerText("You missed it :(");
         console.log("false");
     }
+    i++;
+    showQuestions();
 })
+
+
 
 
 // function getResult() {
