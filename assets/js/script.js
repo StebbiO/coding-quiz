@@ -46,24 +46,24 @@ var questions = [
         correct: "script"
     },
     {
-        question: "Sample question #3",
+        question: "Which of the below CSS selectors has the lowest specificity?",
         options: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4"    
+            ".class",
+            "#id",
+            "h2",
+            ".class p"    
         ],
-        correct: "answer 3"
+        correct: "h2"
     },
     {
-        question: "Sample question #4",
+        question: "What will be the result of the following problem: 90 % 20?",
         options: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4"    
+            "4.5",
+            "70",
+            "1800",
+            "10"    
         ],
-        correct: "answer 4"
+        correct: "10"
     }
 ]
 
@@ -115,7 +115,6 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
         event.target.classList.add("correct");
         score = score + 10;
         console.log(score);
-        // event.target.innerText("You got it!");
         console.log("true");
     } else if(event.target.dataset["correct"] === "false") {
         event.target.classList.add("incorrect");
@@ -124,7 +123,6 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
         } else if(timeLeft < 5) {
             timeLeft = 0;
         }
-        // event.target.innerText("You missed it :(");
         console.log("false");
     }
     i++;
@@ -165,7 +163,6 @@ function endGame() {
         saveScore();
         quizReset();
     }
-    var end = true;
 }
 
 var startQuiz = document.getElementById("start");
