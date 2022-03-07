@@ -11,7 +11,7 @@ counter.textContent = timeLeft;
 var end = false;
 
 
-// counts down from 60
+// counts down from 60 to 0
 function countdown() {
     timeDown = setInterval(function() {
         timeLeft = timeLeft - 1;
@@ -67,7 +67,7 @@ var questions = [
     }
 ]
 
-
+// hides question section and timer to start
 hiddenQuestions = document.getElementById("quiz").style.visibility = "hidden";
 hiddenCounter = document.getElementById("counter").style.visibility = "hidden";
 
@@ -107,15 +107,12 @@ function showQuestions() {
     }
 }
 
-//showQuestions();
-
 // verify answers are correct and change score
 document.querySelector("#answer-choices").addEventListener("click", function(event) {
     if(event.target.dataset["correct"] === "true") {
         event.target.classList.add("correct");
         score = score + 10;
         console.log(score);
-        console.log("true");
     } else if(event.target.dataset["correct"] === "false") {
         event.target.classList.add("incorrect");
         if(timeLeft > 5) {
@@ -123,16 +120,13 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
         } else if(timeLeft < 5) {
             timeLeft = 0;
         }
-        console.log("false");
     }
     i++;
     setTimeout(resetColors, 1000);
 })
 
+// resets the color of all buttons to the default at the start of each question
 function resetColors() {
-    // document.querySelector(".btn-primary").classList.remove("correct");
-    // document.querySelector(".btn-primary").classList.remove("incorrect");
-
     const options = document.querySelectorAll(".btn")
     options.forEach(element => { element.classList.remove("correct")
     element.classList.remove("incorrect")})
@@ -140,18 +134,22 @@ function resetColors() {
 }
 
 function saveScore() {
+    // stops countdown
     clearInterval(timeDown);
+    // creates array to store player data
     var player = [];
     var total = score + timeLeft;
     var name = prompt("Congratulations, your score is " +(total)+". Please enter your name to save your score.");
     player.push(name, total);
 
+    // push player info into another array that will contain all players and scores
     var highScores = JSON.parse(localStorage.getItem("highScores"));
     if (!highScores) {
         highScores = [];
     }
     highScores.push(player);
 
+    // stringify and save high scores
     highScores = JSON.stringify(highScores);
     localStorage.setItem("highScores", highScores);
 }
@@ -165,8 +163,11 @@ function endGame() {
     }
 }
 
+
+// creates start button DOM element
 var startQuiz = document.getElementById("start");
 
+// starts quiz by hiding intro section and revealing questions and starting timer
 startQuiz.addEventListener("click", function() {
     intro = document.getElementById("intro").style.visibility = "hidden";
     visibleQuestions = document.getElementById("quiz").style.visibility = "visible";
@@ -176,6 +177,7 @@ startQuiz.addEventListener("click", function() {
     showQuestions();
 });
 
+// resets defaults when the quiz is restarted
 function quizReset() {
     intro = document.getElementById("intro").style.visibility = "visible";
     visibleQuestions = document.getElementById("quiz").style.visibility = "hidden";
@@ -183,6 +185,6 @@ function quizReset() {
     visibleCounter = document.getElementById("counter").style.visibility = "hidden";
     timeLeft = 60;
     i = 0;
+    score = 0;
     counter.textContent = timeLeft;
-    // showQuestions();
 }
