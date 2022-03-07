@@ -8,6 +8,7 @@ var choice4 = document.getElementById("choice4");
 var questionEl = document.getElementById("question");
 var i = 0;
 counter.textContent = timeLeft;
+var end = false;
 
 
 // counts down from 60
@@ -17,7 +18,6 @@ function countdown() {
 
         if(timeLeft < 0) {
             timeLeft = 0;
-            clearInterval(timeDown);
         }
 
         counter.textContent = timeLeft;
@@ -26,24 +26,24 @@ function countdown() {
 
 var questions = [
     {
-        question: "Sample question #1",
+        question: "Which of the following is not a JavaScript data type?",
         options: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4" 
+            "Truthy",
+            "Number",
+            "Boolean",
+            "String" 
         ],
-        correct: "answer 1"
+        correct: "Truthy"
     },
     {
-        question: "Sample question #2",
+        question: "Which tag is used to link a JavaScript file to an HTML document?",
         options: [
-            "answer 1",
-            "answer 2",
-            "answer 3",
-            "answer 4"    
+            "link",
+            "script",
+            "file",
+            "a"    
         ],
-        correct: "answer 2"
+        correct: "script"
     },
     {
         question: "Sample question #3",
@@ -69,6 +69,7 @@ var questions = [
 
 
 hiddenQuestions = document.getElementById("quiz").style.visibility = "hidden";
+hiddenCounter = document.getElementById("counter").style.visibility = "hidden";
 
 function showQuestions() {
     //show question
@@ -106,7 +107,7 @@ function showQuestions() {
     }
 }
 
-showQuestions();
+//showQuestions();
 
 // verify answers are correct and change score
 document.querySelector("#answer-choices").addEventListener("click", function(event) {
@@ -127,20 +128,25 @@ document.querySelector("#answer-choices").addEventListener("click", function(eve
         console.log("false");
     }
     i++;
-    setTimeout(resetColors, 500);
-    //showQuestions();
-    endGame();
+    setTimeout(resetColors, 1000);
 })
 
 function resetColors() {
-    document.querySelector(".btn-primary").classList.remove("correct");
-    document.querySelector(".btn-primary").classList.remove("incorrect");
+    // document.querySelector(".btn-primary").classList.remove("correct");
+    // document.querySelector(".btn-primary").classList.remove("incorrect");
+
+    const options = document.querySelectorAll(".btn")
+    options.forEach(element => { element.classList.remove("correct")
+    element.classList.remove("incorrect")})
+    endGame();
 }
 
 function saveScore() {
+    clearInterval(timeDown);
     var player = [];
-    var name = prompt("Please enter your name to save your score.");
-    player.push(name, score);
+    var total = score + timeLeft;
+    var name = prompt("Congratulations, your score is " +(total)+". Please enter your name to save your score.");
+    player.push(name, total);
 
     var highScores = JSON.parse(localStorage.getItem("highScores"));
     if (!highScores) {
@@ -157,17 +163,10 @@ function endGame() {
         showQuestions();
     } else {
         saveScore();
+        quizReset();
     }
+    var end = true;
 }
-
-// function getResult() {
-//     var answerChoices = document.getElementById("answer-choices");
-//     answerChoices.addEventListener("click", function() {
-//         if (event.target === true) {
-//             console.log("hello");
-//         }
-//     })
-// }
 
 var startQuiz = document.getElementById("start");
 
@@ -175,5 +174,18 @@ startQuiz.addEventListener("click", function() {
     intro = document.getElementById("intro").style.visibility = "hidden";
     visibleQuestions = document.getElementById("quiz").style.visibility = "visible";
     hiddenButton = document.getElementById("start").style.visibility = "hidden";
+    visibleCounter = document.getElementById("counter").style.visibility = "visible";
     countdown();
+    showQuestions();
 });
+
+function quizReset() {
+    intro = document.getElementById("intro").style.visibility = "visible";
+    visibleQuestions = document.getElementById("quiz").style.visibility = "hidden";
+    visibleButton = document.getElementById("start").style.visibility = "visible";
+    visibleCounter = document.getElementById("counter").style.visibility = "hidden";
+    timeLeft = 60;
+    i = 0;
+    counter.textContent = timeLeft;
+    // showQuestions();
+}
